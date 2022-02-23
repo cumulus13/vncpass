@@ -2,7 +2,7 @@
 
 import sys,os
 
-TightVNC = r"C:\Program Files\TightVNC\tvnserver.exe" or r"C:\Program Files (86)\TightVNC\tvnserver.exe"
+TightVNC = r"C:\PROGRA~1\TightVNC\tvnserver.exe" or r"C:\PROGRA~2\TightVNC\tvnserver.exe"
 
 def reset(password = None):
 	if not password:
@@ -15,6 +15,7 @@ def reset(password = None):
 	print("  [*] TightVNC password has been reset to: %s == %s"%(password, crypted.encode('hex')))
 	os.system(TightVNC + " -stop")
 	os.system(r'reg add "HKLM\SOFTWARE\TightVNC\Server" /v Password /t REG_BINARY /d {} /f'.format(crypted.encode('hex')))
+	os.system(r'reg add "HKLM\SOFTWARE\TightVNC\Server" /v ControlPassword /t REG_BINARY /d {} /f'.format(crypted.encode('hex')))
 	os.system(r'reg add "HKLM\SOFTWARE\TightVNC\Server" /v UseVncAuthentication /t REG_DWORD /d 0x1 /f')
 	os.system(TightVNC + " -start")
 
